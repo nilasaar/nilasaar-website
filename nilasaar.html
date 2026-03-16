@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nilasaar — Essence of the Mountains</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #FAF6EE;
+    --parchment: #F2EAD8;
+    --green-deep: #1E3A2F;
+    --green-mid: #2D5741;
+    --gold: #B8892A;
+    --gold-light: #D4A843;
+    --text-dark: #1A1A14;
+    --text-mid: #4A4A3A;
+    --text-light: #7A7A6A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text-dark);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 4rem;
+    background: rgba(250,246,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,137,42,0.15);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--green-deep); letter-spacing: 0.12em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-mid); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--green-deep); color: var(--cream) !important;
+    padding: 0.6rem 1.4rem !important;
+    letter-spacing: 0.12em !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--green-mid) !important; color: var(--cream) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(45,87,65,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(184,137,42,0.08) 0%, transparent 50%),
+      var(--cream);
+  }
+
+  .hero-botanical-left {
+    position: absolute; left: -60px; top: 50%; transform: translateY(-50%);
+    width: 320px; opacity: 0.18; pointer-events: none;
+    font-size: 18rem; line-height: 1;
+    background: linear-gradient(135deg, var(--green-mid), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: blur(1px);
+  }
+  .hero-botanical-right {
+    position: absolute; right: -60px; top: 30%; transform: translateY(-50%);
+    width: 280px; opacity: 0.14; pointer-events: none;
+    font-size: 15rem; line-height: 1;
+    background: linear-gradient(135deg, var(--gold), var(--green-mid));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: blur(1px);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.8rem;
+    opacity: 0; animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--green-deep);
+    letter-spacing: -0.01em;
+    opacity: 0; animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    margin-top: 1.8rem;
+    font-size: 1.05rem; font-weight: 300;
+    color: var(--text-mid); letter-spacing: 0.04em;
+    max-width: 480px; line-height: 1.7;
+    opacity: 0; animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2rem auto;
+    opacity: 0; animation: fadeUp 1s 0.9s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--green-deep);
+    color: var(--cream);
+    padding: 1rem 2.8rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: all 0.4s;
+    opacity: 0; animation: fadeUp 1s 1.1s forwards;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+  }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .hero-jar {
+    margin-top: 4rem;
+    opacity: 0; animation: fadeUp 1.2s 1.3s forwards;
+  }
+  .hero-jar img {
+    width: 280px;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.18));
+    transition: transform 0.6s ease;
+  }
+  .hero-jar img:hover { transform: translateY(-8px) rotate(1deg); }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 7rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.68rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.15;
+    color: var(--green-deep);
+  }
+  .section-title em { font-style: italic; }
+  .gold-rule {
+    width: 50px; height: 1px;
+    background: var(--gold);
+    margin: 1.8rem 0;
+  }
+
+  /* ── PLACE SECTION ── */
+  .place-section {
+    background: var(--green-deep);
+    color: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .place-section::before {
+    content: 'ARAKU';
+    position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16rem; font-weight: 600; letter-spacing: -0.05em;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none; white-space: nowrap;
+  }
+  .place-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .place-image-block {
+    position: relative;
+  }
+  .place-img-placeholder {
+    width: 100%; aspect-ratio: 3/4;
+    background: linear-gradient(135deg, rgba(45,87,65,0.8), rgba(184,137,42,0.3));
+    border: 1px solid rgba(184,137,42,0.2);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem;
+    position: relative; overflow: hidden;
+  }
+  .place-img-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(184,137,42,0.03) 40px, rgba(184,137,42,0.03) 41px);
+  }
+  .place-img-placeholder .img-icon { font-size: 3rem; opacity: 0.4; }
+  .place-img-placeholder .img-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(250,246,238,0.4);
+  }
+  .place-content .section-label { color: var(--gold-light); }
+  .place-content .section-title { color: var(--cream); }
+  .place-content .gold-rule { background: var(--gold-light); }
+  .place-body {
+    font-size: 1rem; line-height: 1.9; color: rgba(250,246,238,0.75);
+    font-weight: 300;
+  }
+  .place-body p + p { margin-top: 1.2rem; }
+  .place-stats {
+    display: flex; gap: 3rem; margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(184,137,42,0.2);
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300;
+    color: var(--gold-light); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(250,246,238,0.45); margin-top: 0.3rem;
+  }
+
+  /* ── STORY SECTION ── */
+  .story-section { background: var(--parchment); }
+  .story-inner {
+    max-width: 720px; margin: 0 auto; text-align: center;
+  }
+  .story-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem; font-weight: 300; font-style: italic;
+    line-height: 1.8; color: var(--text-mid);
+  }
+  .story-body p + p { margin-top: 1.5rem; }
+  .story-signature {
+    margin-top: 3rem;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .story-placeholder-badge {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px dashed var(--gold);
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.6;
+  }
+
+  /* ── PROOF SECTION ── */
+  .proof-section { background: var(--cream); }
+  .proof-header { text-align: center; margin-bottom: 4rem; }
+  .proof-header .gold-rule { margin: 1.8rem auto; }
+  .proof-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-style: italic;
+    color: var(--text-mid); max-width: 560px; margin: 0 auto;
+    line-height: 1.6;
+  }
+  .proof-pillars {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: rgba(184,137,42,0.15);
+    border: 1px solid rgba(184,137,42,0.15);
+    margin-bottom: 5rem;
+  }
+  .proof-pillar {
+    background: var(--cream);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .proof-pillar:hover { background: var(--parchment); }
+  .pillar-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--green-deep); margin-bottom: 0.5rem;
+  }
+  .pillar-desc {
+    font-size: 0.8rem; color: var(--text-light);
+    letter-spacing: 0.04em; line-height: 1.6;
+  }
+  .lab-report-block { text-align: center; }
+  .lab-report-placeholder {
+    display: inline-block;
+    width: 100%; max-width: 680px;
+    aspect-ratio: 16/10;
+    background: var(--parchment);
+    border: 2px dashed rgba(184,137,42,0.35);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem; margin: 0 auto;
+    transition: border-color 0.3s;
+    cursor: pointer;
+  }
+  .lab-report-placeholder:hover { border-color: var(--gold); }
+  .lab-icon { font-size: 2.5rem; opacity: 0.4; }
+  .lab-label {
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .lab-sublabel {
+    font-size: 0.68rem; color: var(--gold); letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  /* ── PRODUCT SECTION ── */
+  .product-section { background: var(--green-deep); }
+  .product-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .product-jar {
+    display: flex; justify-content: center; align-items: center;
+  }
+  .product-jar img {
+    width: 320px;
+    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.4));
+    transition: transform 0.6s;
+  }
+  .product-jar img:hover { transform: scale(1.03) rotate(-1deg); }
+  .product-content .section-label { color: var(--gold-light); }
+  .product-content .section-title { color: var(--cream); }
+  .product-content .gold-rule { background: var(--gold); }
+  .product-desc {
+    font-size: 0.95rem; line-height: 1.9;
+    color: rgba(250,246,238,0.7);
+    margin-bottom: 2.5rem;
+  }
+  .product-meta {
+    display: flex; gap: 2rem; margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(184,137,42,0.2);
+  }
+  .meta-item { text-align: center; flex: 1; }
+  .meta-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--gold-light);
+  }
+  .meta-key {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(250,246,238,0.4); margin-top: 0.2rem;
+  }
+  .btn-gold {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--green-deep);
+    padding: 1rem 2.8rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ── REVIEWS SECTION ── */
+  .reviews-section { background: var(--parchment); }
+  .reviews-header { text-align: center; margin-bottom: 4rem; }
+  .reviews-header .gold-rule { margin: 1.8rem auto; }
+  .whatsapp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+  }
+  .whatsapp-placeholder {
+    aspect-ratio: 9/14;
+    background: var(--cream);
+    border: 1px solid rgba(184,137,42,0.2);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.8rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .whatsapp-placeholder:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  }
+  .whatsapp-placeholder::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #25D366, #128C7E);
+  }
+  .wa-icon { font-size: 2rem; opacity: 0.3; }
+  .wa-label {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-light); text-align: center; padding: 0 1rem;
+  }
+
+  .customers-subhead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300;
+    color: var(--green-deep); text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .customers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .customer-photo-placeholder {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, rgba(45,87,65,0.1), rgba(184,137,42,0.1));
+    border: 1px solid rgba(184,137,42,0.15);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  .customer-photo-placeholder:hover { transform: scale(1.03); }
+  .customer-icon { font-size: 2rem; opacity: 0.25; }
+  .customer-label {
+    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* ── GIFT SECTION ── */
+  .gift-section {
+    background: var(--cream);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .gift-section::before {
+    content: '♥';
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    font-size: 40rem; opacity: 0.02;
+    color: var(--gold); pointer-events: none;
+    font-family: serif;
+  }
+  .gift-inner { max-width: 640px; margin: 0 auto; position: relative; }
+  .gift-body {
+    font-size: 1rem; line-height: 1.9; color: var(--text-mid);
+    margin-bottom: 2.5rem;
+  }
+  .gift-tags {
+    display: flex; flex-wrap: wrap; gap: 0.8rem;
+    justify-content: center; margin-bottom: 3rem;
+  }
+  .gift-tag {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(184,137,42,0.35);
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-deep);
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300; letter-spacing: 0.15em;
+    color: var(--cream); margin-bottom: 0.5rem;
+  }
+  .footer-tagline {
+    font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 3rem;
+  }
+  .footer-divider {
+    width: 1px; height: 40px;
+    background: rgba(184,137,42,0.3);
+    margin: 0 auto 3rem;
+  }
+  .footer-copy {
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    color: rgba(250,246,238,0.3);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .place-grid, .product-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .proof-pillars { grid-template-columns: repeat(2, 1fr); }
+    .whatsapp-grid { grid-template-columns: repeat(2, 1fr); }
+    .customers-grid { grid-template-columns: repeat(2, 1fr); }
+    .place-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NILASAAR</div>
+  <ul class="nav-links">
+    <li><a href="#place">The Valley</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#proof">Purity</a></li>
+    <li><a href="#product">The Honey</a></li>
+    <li><a href="#product" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-botanical-left">✿</div>
+  <div class="hero-botanical-right">❧</div>
+
+  <p class="hero-eyebrow">Wild Honey · Araku Valley · Eastern Ghats</p>
+  <h1>Some things are<br/><em>still untouched.</em></h1>
+  <p class="hero-sub">Wild honey from the forests of Araku — collected the way it always has been.</p>
+  <div class="hero-divider"></div>
+  <a href="#product" class="btn-primary"><span>Taste It Yourself</span></a>
+
+  <div class="hero-jar">
+    <img src="/mnt/user-data/uploads/BE5F8F4E-27CB-45AA-AFDE-E11D1EB16C7C.png" alt="Nilasaar Wild Honey Jar"/>
+  </div>
+</section>
+
+<!-- PLACE -->
+<section class="place-section" id="place">
+  <div class="container">
+    <div class="place-grid">
+      <div class="place-image-block reveal">
+        <div class="place-img-placeholder">
+          <span class="img-icon">🏔</span>
+          <span class="img-label">Araku Valley Photography</span>
+        </div>
+      </div>
+      <div class="place-content reveal">
+        <p class="section-label">The Origin</p>
+        <h2 class="section-title">Araku<br/><em>doesn't rush.</em></h2>
+        <div class="gold-rule"></div>
+        <div class="place-body">
+          <p>Deep in the Eastern Ghats, where the valleys stay cool and the air carries no exhaust, wildflowers bloom without instruction. No pesticides. No schedules. No interference.</p>
+          <p>The bees here have been doing the same thing for centuries — following the same flowers, building the same combs, producing honey that tastes like the forest it came from. Complex, raw, and completely alive.</p>
+          <p>This is where Nilasaar begins.</p>
+        </div>
+        <div class="place-stats">
+          <div class="stat-item">
+            <div class="stat-num">900m</div>
+            <div class="stat-label">Above sea level</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Wildflower sourced</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Pesticides used</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section" id="story">
+  <div class="container">
+    <div class="story-inner reveal">
+      <p class="section-label">The Story</p>
+      <h2 class="section-title" style="text-align:center;">I wasn't looking<br/><em>to start a business.</em></h2>
+      <div class="gold-rule" style="margin:1.8rem auto;"></div>
+      <div class="story-body">
+        <p>I grew up eating sugar in every form it came. When I finally started paying attention to what I was putting in my body, honey felt like a safe choice — until I started reading labels.</p>
+        <p>What I found on those shelves didn't feel like honey. It felt like a performance of honey.</p>
+        <p>So I went back to Araku — a valley I'd loved since childhood — and found what I'd been looking for. Honey that tasted like nowhere else. Because it comes from nowhere else.</p>
+        <p>I couldn't keep that to myself.</p>
+      </div>
+      <p class="story-signature">— Founder, Nilasaar</p>
+      <div class="story-placeholder-badge">✦ Full founder story — coming soon ✦</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof-section" id="proof">
+  <div class="container">
+    <div class="proof-header reveal">
+      <p class="section-label">Purity Promise</p>
+      <h2 class="section-title">We don't ask you<br/><em>to trust us.</em></h2>
+      <div class="gold-rule"></div>
+      <p class="proof-quote">"We show you why you can."</p>
+    </div>
+
+    <div class="proof-pillars reveal">
+      <div class="proof-pillar">
+        <div class="pillar-icon">🌿</div>
+        <div class="pillar-title">No Sugar Syrup</div>
+        <div class="pillar-desc">Ever. What you get is exactly what the bees made.</div>
+      </div>
+      <div class="proof-pillar">
+        <div class="pillar-icon">🔬</div>
+        <div class="pillar-title">Lab Tested</div>
+        <div class="pillar-desc">Independent verification. Not a claim — a document.</div>
+      </div>
+      <div class="proof-pillar">
+        <div class="pillar-icon">🐝</div>
+        <div class="pillar-title">Wildflower Sourced</div>
+        <div class="pillar-desc">From pesticide-free valleys, season after season.</div>
+      </div>
+      <div class="proof-pillar">
+        <div class="pillar-icon">❄️</div>
+        <div class="pillar-title">Cold Processed</div>
+        <div class="pillar-desc">Nature's work, preserved as is.</div>
+      </div>
+    </div>
+
+    <div class="lab-report-block reveal">
+      <div class="lab-report-placeholder">
+        <span class="lab-icon">📋</span>
+        <span class="lab-label">Lab Report — Upload Your Certificate Here</span>
+        <span class="lab-sublabel">Your proof. In plain sight.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="product-section" id="product">
+  <div class="container">
+    <div class="product-grid">
+      <div class="product-jar reveal">
+        <img src="/mnt/user-data/uploads/BE5F8F4E-27CB-45AA-AFDE-E11D1EB16C7C.png" alt="Nilasaar Honey 300g"/>
+      </div>
+      <div class="product-content reveal">
+        <p class="section-label">The Product</p>
+        <h2 class="section-title" style="color:var(--cream);">One honey.<br/><em>Nothing added.<br/>Nothing removed.</em></h2>
+        <div class="gold-rule"></div>
+        <p class="product-desc">300 grams of wild Araku honey. Hygienically packed. Lab verified. Ready for your morning routine, your kitchen, or someone you care about.</p>
+        <div class="product-meta">
+          <div class="meta-item">
+            <div class="meta-val">300g</div>
+            <div class="meta-key">Net Weight</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-val">100%</div>
+            <div class="meta-key">Wild Sourced</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-val">0</div>
+            <div class="meta-key">Additives</div>
+          </div>
+        </div>
+        <a href="#" class="btn-gold">Get Your Jar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="reviews-header reveal">
+      <p class="section-label">Real People. Real Words.</p>
+      <h2 class="section-title" style="text-align:center;">What our<br/><em>folks are saying.</em></h2>
+      <div class="gold-rule" style="margin:1.8rem auto;"></div>
+    </div>
+
+    <div class="whatsapp-grid reveal">
+      <div class="whatsapp-placeholder">
+        <span class="wa-icon">💬</span>
+        <span class="wa-label">WhatsApp Review Screenshot</span>
+      </div>
+      <div class="whatsapp-placeholder">
+        <span class="wa-icon">💬</span>
+        <span class="wa-label">WhatsApp Review Screenshot</span>
+      </div>
+      <div class="whatsapp-placeholder">
+        <span class="wa-icon">💬</span>
+        <span class="wa-label">WhatsApp Review Screenshot</span>
+      </div>
+      <div class="whatsapp-placeholder">
+        <span class="wa-icon">💬</span>
+        <span class="wa-label">WhatsApp Review Screenshot</span>
+      </div>
+      <div class="whatsapp-placeholder">
+        <span class="wa-icon">💬</span>
+        <span class="wa-label">WhatsApp Review Screenshot</span>
+      </div>
+      <div class="whatsapp-placeholder">
+        <span class="wa-icon">💬</span>
+        <span class="wa-label">WhatsApp Review Screenshot</span>
+      </div>
+    </div>
+
+    <h3 class="customers-subhead reveal">Happy <em>customers</em></h3>
+    <div class="customers-grid reveal">
+      <div class="customer-photo-placeholder">
+        <span class="customer-icon">📸</span>
+        <span class="customer-label">Customer Photo</span>
+      </div>
+      <div class="customer-photo-placeholder">
+        <span class="customer-icon">📸</span>
+        <span class="customer-label">Customer Photo</span>
+      </div>
+      <div class="customer-photo-placeholder">
+        <span class="customer-icon">📸</span>
+        <span class="customer-label">Customer Photo</span>
+      </div>
+      <div class="customer-photo-placeholder">
+        <span class="customer-icon">📸</span>
+        <span class="customer-label">Customer Photo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT -->
+<section class="gift-section" id="gift">
+  <div class="container">
+    <div class="gift-inner reveal">
+      <p class="section-label">For Someone Special</p>
+      <h2 class="section-title" style="text-align:center;">Give something<br/><em>that has a story.</em></h2>
+      <div class="gold-rule" style="margin:1.8rem auto;"></div>
+      <p class="gift-body">Most gifts are forgotten by next week. Nilasaar stays — in the kitchen, in the morning cup, in the quiet satisfaction of giving something genuinely good.</p>
+      <div class="gift-tags">
+        <span class="gift-tag">For wellness journeys</span>
+        <span class="gift-tag">For someone who has everything</span>
+        <span class="gift-tag">For anyone who deserves the real thing</span>
+      </div>
+      <a href="#" class="btn-primary"><span>Order as a Gift</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">NILASAAR</div>
+  <div class="footer-tagline">Essence of the Mountains</div>
+  <div class="footer-divider"></div>
+  <p class="footer-copy">© 2025 Nilasaar · Wild Honey from Araku · Crafted with intention</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 50
+      ? '0 4px 30px rgba(0,0,0,0.06)'
+      : 'none';
+  });
+</script>
+</body>
+</html>
