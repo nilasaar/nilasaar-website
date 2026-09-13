@@ -11,46 +11,56 @@ title: Nilasaar — Essence of the Mountains
   <h1>Some things are<br /><em>still untouched.</em></h1>
   <p class="hero-sub">Collected and grown the way they always have been — no shortcuts, no additives, no interference.</p>
   <div class="hero-divider"></div>
-  <a href="#honey" class="btn-primary"><span>Taste It Yourself</span></a>
-
-  {% if collections.featuredProducts.length and collections.featuredProducts[0].data.image %}
-    <div class="hero-jar">
-      <img src="{{ collections.featuredProducts[0].data.image }}" alt="{{ collections.featuredProducts[0].data.title }}" />
-    </div>
-  {% endif %}
+  <a href="#story" class="btn-primary"><span>Read Our Story</span></a>
 </section>
 
 <section class="story-section" id="story">
   <div class="container">
-    <div class="story-grid">
-      <div class="story-content reveal">
-        <p class="section-label">The Origin</p>
-        <h2 class="section-title">Araku<br /><em>doesn't rush.</em></h2>
-        <div class="gold-rule"></div>
-        <div class="story-body">
-          <p>Deep in the Eastern Ghats, where the valleys stay cool and the air carries no exhaust, wildflowers bloom without instruction. No pesticides. No schedules. No interference.</p>
-          <p>The bees here have followed the same flowers for generations, producing honey that tastes like the forest it came from — complex, raw, and completely alive. The coffee grows in their shade, ripening slowly at altitude.</p>
-        </div>
-        <div class="story-stats">
-          <div class="stat-item">
-            <div class="stat-num">900m</div>
-            <div class="stat-label">Above sea level</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Wildflower sourced</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">0</div>
-            <div class="stat-label">Pesticides used</div>
-          </div>
-        </div>
+    <div class="story-inner reveal">
+      <p class="section-label">The Origin</p>
+      <h2 class="section-title">Araku<br /><em>doesn't rush.</em></h2>
+      <div class="gold-rule"></div>
+      <div class="story-body">
+        <p>Deep in the Eastern Ghats, where the valleys stay cool and the air carries no exhaust, wildflowers bloom without instruction. No pesticides. No schedules. No interference.</p>
+        <p>The bees here have followed the same flowers for generations, producing honey that tastes like the forest it came from — complex, raw, and completely alive. The coffee grows in their shade, ripening slowly at altitude.</p>
       </div>
-      <div class="story-quote-block reveal">
-        <p class="story-quote">"I went back to a valley I'd loved since childhood, and found honey and coffee that tasted like nowhere else. Because they come from nowhere else."</p>
-        <p class="story-signature">&mdash; Founder, Nilasaar</p>
+      <div class="story-stats">
+        <div class="stat-item">
+          <div class="stat-num">900m</div>
+          <div class="stat-label">Above sea level</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Wildflower sourced</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Pesticides used</div>
+        </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="catalog catalog-light" id="honey">
+  <div class="container">
+    <div class="catalog-header reveal">
+      <p class="section-label">The Product</p>
+      <h2 class="section-title">One honey.<br /><em>Nothing added.<br />Nothing removed.</em></h2>
+      <div class="gold-rule"></div>
+    </div>
+    {% if collections.honeyProducts.length == 1 %}
+      {% set product = collections.honeyProducts[0] %}
+      {% include "featured-product.njk" %}
+    {% elif collections.honeyProducts.length > 1 %}
+      <div class="product-grid reveal">
+        {% for product in collections.honeyProducts %}
+          {% include "product-card.njk" %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="catalog-empty">New jars are on their way &mdash; check back soon.</p>
+    {% endif %}
   </div>
 </section>
 
@@ -87,37 +97,14 @@ title: Nilasaar — Essence of the Mountains
   </div>
 </section>
 
-<section class="catalog catalog-dark" id="honey">
+<section class="reviews-section" id="reviews">
   <div class="container">
-    <p class="section-label">The Product</p>
-    <h2 class="section-title">The <em>Honey</em></h2>
-    <div class="gold-rule"></div>
-    {% if collections.honeyProducts.length %}
-      <div class="product-grid">
-        {% for product in collections.honeyProducts %}
-          {% include "product-card.njk" %}
-        {% endfor %}
-      </div>
-    {% else %}
-      <p class="catalog-empty">New jars are on their way &mdash; check back soon.</p>
-    {% endif %}
-  </div>
-</section>
-
-<section class="catalog catalog-light" id="coffee">
-  <div class="container">
-    <p class="section-label">The Product</p>
-    <h2 class="section-title">The <em>Coffee</em></h2>
-    <div class="gold-rule"></div>
-    {% if collections.coffeeProducts.length %}
-      <div class="product-grid">
-        {% for product in collections.coffeeProducts %}
-          {% include "product-card.njk" %}
-        {% endfor %}
-      </div>
-    {% else %}
-      <p class="catalog-empty">Our first batch is roasting &mdash; coffee arrives here soon.</p>
-    {% endif %}
+    <div class="reviews-header reveal">
+      <p class="section-label">Real People. Real Words.</p>
+      <h2 class="section-title">What our<br /><em>folks are saying.</em></h2>
+      <div class="gold-rule"></div>
+      <p class="catalog-empty">Our first jars are just reaching people &mdash; reviews and customer photos will live here soon.</p>
+    </div>
   </div>
 </section>
 
@@ -134,6 +121,23 @@ title: Nilasaar — Essence of the Mountains
         <span class="gift-tag">For anyone who deserves the real thing</span>
       </div>
       <a href="#honey" class="btn-gold">Order as a Gift</a>
+    </div>
+  </div>
+</section>
+
+<section class="founder-section">
+  <div class="container">
+    <div class="founder-inner reveal">
+      <p class="section-label">The Story</p>
+      <h2 class="section-title">I wasn't looking<br /><em>to start a business.</em></h2>
+      <div class="gold-rule"></div>
+      <div class="founder-body">
+        <p>I grew up eating sugar in every form it came. When I finally started paying attention to what I was putting in my body, honey felt like a safe choice — until I started reading labels.</p>
+        <p>What I found on those shelves didn't feel like honey. It felt like a performance of honey.</p>
+        <p>So I went back to Araku — a valley I'd loved since childhood — and found what I'd been looking for. Honey and coffee that tasted like nowhere else. Because they come from nowhere else.</p>
+        <p>I couldn't keep that to myself.</p>
+      </div>
+      <p class="founder-signature">&mdash; Founder, Nilasaar</p>
     </div>
   </div>
 </section>

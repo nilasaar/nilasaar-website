@@ -1,0 +1,28 @@
+---
+layout: base.njk
+title: Nilasaar Coffee — Slow Grown, Never Rushed
+---
+
+<section class="page-hero">
+  <p class="hero-eyebrow">Shade Grown &middot; Eastern Ghats</p>
+  <h1>One coffee.<br /><em>Slow grown.<br />Never rushed.</em></h1>
+  <p class="hero-sub">Grown in the same forests as our honey, at altitude, in the shade of the canopy &mdash; ripened slowly, roasted with care.</p>
+  <div class="hero-divider"></div>
+</section>
+
+<section class="catalog catalog-light">
+  <div class="container">
+    {% if collections.coffeeProducts.length == 1 %}
+      {% set product = collections.coffeeProducts[0] %}
+      {% include "featured-product.njk" %}
+    {% elif collections.coffeeProducts.length > 1 %}
+      <div class="product-grid reveal">
+        {% for product in collections.coffeeProducts %}
+          {% include "product-card.njk" %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="catalog-empty">Our first batch is roasting &mdash; coffee arrives here soon.</p>
+    {% endif %}
+  </div>
+</section>

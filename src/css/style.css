@@ -1,6 +1,6 @@
 :root {
-  --cream: #faf6ee;
-  --parchment: #f2ead8;
+  --cream: #fdfbf7;
+  --parchment: #f6f2e9;
   --green-deep: #1e3a2f;
   --green-mid: #2d5741;
   --gold: #b8892a;
@@ -12,7 +12,8 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* Smooth scrolling is handled by Lenis (src/js/smooth-scroll.js) so it can
+   also ease anchor-link jumps — native scroll-behavior would fight it. */
 
 body {
   background: var(--cream);
@@ -140,13 +141,22 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06); }
 }
 .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-.hero-jar { margin-top: 3.5rem; opacity: 0; animation: fadeUp 1.2s 1.3s forwards; }
-.hero-jar img {
-  width: 260px;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.18));
-  transition: transform 0.6s ease;
+/* ── SECONDARY PAGE HERO (e.g. Coffee page) ── */
+.page-hero {
+  padding: 10rem 2rem 4rem;
+  text-align: center;
+  background: var(--cream);
 }
-.hero-jar img:hover { transform: translateY(-8px) rotate(1deg); }
+.page-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 300; line-height: 1.15;
+  color: var(--green-deep);
+  opacity: 0; animation: fadeUp 1s 0.4s forwards;
+}
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+.page-hero .hero-sub { max-width: 520px; margin: 1.6rem auto 0; }
+.page-hero .hero-divider { margin: 2rem auto 0; }
 
 /* ── SHARED SECTION STYLES ── */
 section { padding: 6rem 2rem; position: relative; }
@@ -177,14 +187,12 @@ section { padding: 6rem 2rem; position: relative; }
 .story-section .section-label { color: var(--gold-light); }
 .story-section .section-title { color: var(--cream); }
 .story-section .gold-rule { background: var(--gold-light); }
-.story-grid {
-  display: grid; grid-template-columns: 1.1fr 0.9fr;
-  gap: 4rem; align-items: center;
-}
+.story-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+.story-inner .gold-rule { margin: 1.6rem auto; }
 .story-body { font-size: 1rem; line-height: 1.9; color: rgba(250, 246, 238, 0.75); }
 .story-body p + p { margin-top: 1.2rem; }
 .story-stats {
-  display: flex; gap: 2.5rem; margin-top: 2.5rem;
+  display: flex; justify-content: center; gap: 2.5rem; margin-top: 2.5rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(184, 137, 42, 0.2);
 }
@@ -197,20 +205,27 @@ section { padding: 6rem 2rem; position: relative; }
   font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
   color: rgba(250, 246, 238, 0.45); margin-top: 0.3rem;
 }
-.story-quote-block {
-  padding: 2rem 0 2rem 2.5rem;
-  border-left: 1px solid rgba(184, 137, 42, 0.3);
-}
-.story-quote {
+
+/* ── FOUNDER SECTION ── */
+.founder-section { background: var(--parchment); text-align: center; }
+.founder-inner { max-width: 680px; margin: 0 auto; }
+.founder-inner .gold-rule { margin: 1.6rem auto; }
+.founder-body {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem; font-weight: 300; font-style: italic;
-  line-height: 1.6; color: var(--cream);
+  font-size: 1.3rem; font-weight: 300; font-style: italic;
+  line-height: 1.8; color: var(--text-mid);
 }
-.story-signature {
-  margin-top: 1.5rem;
+.founder-body p + p { margin-top: 1.3rem; }
+.founder-signature {
+  margin-top: 2rem;
   font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--gold);
 }
+
+/* ── REVIEWS SECTION ── */
+.reviews-section { background: var(--parchment); text-align: center; }
+.reviews-header { max-width: 600px; margin: 0 auto; }
+.reviews-header .gold-rule { margin: 1.6rem auto; }
 
 /* ── PURITY SECTION ── */
 .purity-section { background: var(--cream); text-align: center; }
@@ -314,6 +329,55 @@ section { padding: 6rem 2rem; position: relative; }
 .product-card-desc {
   font-size: 0.88rem; line-height: 1.65;
   color: var(--text-mid);
+}
+
+/* ── FEATURED PRODUCT (single-item catalog, e.g. one honey SKU) ── */
+.featured-product {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  margin-top: 3rem;
+  max-width: 900px;
+}
+.featured-product-image {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(135deg, rgba(45, 87, 65, 0.85), rgba(184, 137, 42, 0.35));
+}
+.featured-product-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.featured-product-image .product-card-icon { font-size: 4.5rem; }
+.featured-product-content { position: relative; }
+.featured-product-content .product-card-badge {
+  position: static;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.featured-product-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  color: var(--green-deep);
+}
+.featured-product-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; color: var(--gold);
+  margin-top: 0.4rem; margin-bottom: 1.2rem;
+}
+.featured-product-desc {
+  font-size: 0.95rem; line-height: 1.75;
+  color: var(--text-mid);
+  margin-bottom: 1.8rem;
+  max-width: 380px;
+}
+.featured-product-content .btn-add-to-cart {
+  width: auto;
+  padding: 1rem 2.6rem;
+  margin-top: 0;
 }
 
 /* ── GIFT SECTION ── */
@@ -503,15 +567,44 @@ footer {
 }
 #cart-view-success p { color: var(--text-mid); line-height: 1.7; margin-bottom: 1.6rem; }
 
+/* ── BEE CURSOR ── */
+body.bee-cursor-active,
+body.bee-cursor-active * {
+  cursor: none !important;
+}
+.bee-cursor {
+  position: fixed; top: 0; left: 0;
+  font-size: 1.7rem;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.25));
+}
+.bee-trail {
+  position: fixed; top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  animation: bee-trail-fade 0.5s ease-out forwards;
+}
+@keyframes bee-trail-fade {
+  from { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { gap: 1.3rem; }
   .nav-links li:not(:last-child) { display: none; }
-  .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .story-quote-block { border-left: none; border-top: 1px solid rgba(184, 137, 42, 0.3); padding: 2rem 0 0; }
   .purity-pillars { grid-template-columns: repeat(2, 1fr); }
   .catalog .container { text-align: center; }
   .catalog .section-label, .catalog .section-title { text-align: center; }
   .gold-rule { margin-left: auto; margin-right: auto; }
+  .featured-product { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+  .featured-product-content { text-align: center; }
+  .featured-product-desc { margin-left: auto; margin-right: auto; }
 }

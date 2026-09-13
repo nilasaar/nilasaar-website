@@ -1,0 +1,22 @@
+<div class="featured-product reveal">
+  <div class="featured-product-image">
+    {% if product.data.image %}
+      <img src="{{ product.data.image }}" alt="{{ product.data.title }}" />
+    {% else %}
+      <span class="product-card-icon">{{ "🍯" if product.data.category == "honey" else "☕" }}</span>
+    {% endif %}
+  </div>
+  <div class="featured-product-content">
+    {% if product.data.featured %}<span class="product-card-badge">Featured</span>{% endif %}
+    <h3>{{ product.data.title }}</h3>
+    <p class="featured-product-price">&#8377;{{ product.data.price }}</p>
+    <p class="featured-product-desc">{{ product.data.description }}</p>
+    <button
+      type="button"
+      class="btn-add-to-cart"
+      data-slug="{{ product.fileSlug }}"
+      data-title="{{ product.data.title }}"
+      data-price="{{ product.data.price }}"
+    >Add to Cart</button>
+  </div>
+</div>
