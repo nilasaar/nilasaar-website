@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="/">NILASAAR</a>
+    <ul class="nav-links">
+      <li><a href="/#story">Our Story</a></li>
+      <li><a href="/#purity">Purity</a></li>
+      <li><a href="/#honey">Honey</a></li>
+      <li><a href="/#coffee">Coffee</a></li>
+      <li>
+        <button type="button" id="cart-toggle" class="nav-cart" aria-label="Open cart">
+          Cart <span id="cart-count" class="cart-count" hidden>0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <div id="cart-overlay" class="cart-overlay" hidden></div>
+  <aside id="cart-drawer" class="cart-drawer" hidden aria-hidden="true">
+    <button type="button" id="cart-close" class="cart-close" aria-label="Close cart">&times;</button>
+
+    <div id="cart-view-items" class="cart-view">
+      <h2>Your Cart</h2>
+      <div id="cart-items" class="cart-items"></div>
+      <p id="cart-empty" class="cart-empty">Your cart is empty.</p>
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span id="cart-total">₹0</span>
+        </div>
+        <button type="button" id="cart-checkout-btn" class="btn-gold cart-full-width">Checkout</button>
+      </div>
+    </div>
+
+    <div id="cart-view-checkout" class="cart-view" hidden>
+      <h2>Delivery Details</h2>
+      <form id="checkout-form">
+        <label>Name<input type="text" name="name" required /></label>
+        <label>Phone<input type="tel" name="phone" required /></label>
+        <label>Email (optional)<input type="email" name="email" /></label>
+        <label>Address Line<input type="text" name="line1" placeholder="House no., street, area" required /></label>
+        <label>
+          Pincode
+          <input type="text" name="pincode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required />
+        </label>
+        <p id="pincode-status" class="pincode-status" hidden></p>
+        <div class="checkout-form-row">
+          <label>City<input type="text" name="city" required /></label>
+          <label>State<input type="text" name="state" required /></label>
+        </div>
+        <label class="checkbox-label">
+          <input type="checkbox" name="saveAddress" />
+          Save this address for next time
+        </label>
+        <p id="checkout-error" class="checkout-error" hidden></p>
+        <button type="submit" id="checkout-pay-btn" class="btn-gold cart-full-width">
+          Pay <span id="checkout-total">₹0</span>
+        </button>
+        <button type="button" id="checkout-back-btn" class="cart-link-btn">&larr; Back to cart</button>
+      </form>
+    </div>
+
+    <div id="cart-view-success" class="cart-view" hidden>
+      <h2>Thank you!</h2>
+      <p>Your order is confirmed. We'll be in touch shortly to arrange delivery.</p>
+      <button type="button" id="cart-success-close-btn" class="btn-gold cart-full-width">Close</button>
+    </div>
+  </aside>
+
+  <footer>
+    <div class="footer-logo">NILASAAR</div>
+    <p class="footer-tagline">Essence of the Mountains</p>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">&copy; 2026 Nilasaar &middot; Wild Honey &amp; Coffee from the Eastern Ghats &middot; Crafted with intention</p>
+  </footer>
+
+  <script>
+    var reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry, i) {
+          if (entry.isIntersecting) {
+            setTimeout(function () { entry.target.classList.add('visible'); }, i * 80);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(function (el) { observer.observe(el); });
+    } else {
+      reveals.forEach(function (el) { el.classList.add('visible'); });
+    }
+
+    var nav = document.querySelector('nav');
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="/js/cart.js" defer></script>
+</body>
+</html>

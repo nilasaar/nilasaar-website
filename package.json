@@ -1,0 +1,16 @@
+{
+  "name": "nilasaar-website",
+  "version": "1.0.0",
+  "description": "Nilasaar — Essence of the Mountains. Wild honey & coffee, sourced from the Eastern Ghats.",
+  "scripts": {
+    "start": "npm run build:manifest && eleventy --serve",
+    "build": "npm run build:manifest && eleventy",
+    "build:manifest": "node scripts/generate-product-manifest.js"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  }
+}

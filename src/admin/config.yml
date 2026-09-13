@@ -1,0 +1,40 @@
+# --- BACKEND ---
+# "github" backend commits straight to your GitHub repo. It needs an OAuth
+# app so Decap can log the editor in via GitHub. Since the live site is
+# hosted on Vercel/Cloudflare (not Netlify), base_url points at Netlify's
+# OAuth provider, which handles the login handshake without Netlify ever
+# serving the actual site. One-time setup — see README.md "Turning on the
+# CMS itself".
+
+backend:
+  name: github
+  repo: nilasaar/nilasaar-website   # <-- your GitHub repo
+  branch: main
+  base_url: https://api.netlify.com
+
+# Where uploaded images actually get committed in the repo, and the public
+# URL path they're served from once the site is built.
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "src/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product Name", name: "title", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["honey", "coffee"]
+        hint: "Which product line this belongs to."
+      - { label: "Price (₹)", name: "price", widget: "number", value_type: "int" }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Featured on homepage?"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        required: false

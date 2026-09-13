@@ -1,0 +1,22 @@
+<article class="product-card">
+  <div class="product-card-image">
+    {% if product.data.image %}
+      <img src="{{ product.data.image }}" alt="{{ product.data.title }}" loading="lazy" />
+    {% else %}
+      <span class="product-card-icon">{{ "🍯" if product.data.category == "honey" else "☕" }}</span>
+    {% endif %}
+    {% if product.data.featured %}<span class="product-card-badge">Featured</span>{% endif %}
+  </div>
+  <div class="product-card-body">
+    <h3>{{ product.data.title }}</h3>
+    <p class="product-card-price">₹{{ product.data.price }}</p>
+    <p class="product-card-desc">{{ product.data.description }}</p>
+    <button
+      type="button"
+      class="btn-add-to-cart"
+      data-slug="{{ product.fileSlug }}"
+      data-title="{{ product.data.title }}"
+      data-price="{{ product.data.price }}"
+    >Add to Cart</button>
+  </div>
+</article>

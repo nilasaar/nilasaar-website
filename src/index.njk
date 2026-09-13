@@ -1,0 +1,139 @@
+---
+layout: base.njk
+title: Nilasaar — Essence of the Mountains
+---
+
+<section class="hero">
+  <span class="hero-botanical hero-botanical-left" aria-hidden="true">&#10047;</span>
+  <span class="hero-botanical hero-botanical-right" aria-hidden="true">&#10087;</span>
+
+  <p class="hero-eyebrow">Wild Honey &amp; Coffee &middot; Eastern Ghats</p>
+  <h1>Some things are<br /><em>still untouched.</em></h1>
+  <p class="hero-sub">Collected and grown the way they always have been — no shortcuts, no additives, no interference.</p>
+  <div class="hero-divider"></div>
+  <a href="#honey" class="btn-primary"><span>Taste It Yourself</span></a>
+
+  {% if collections.featuredProducts.length and collections.featuredProducts[0].data.image %}
+    <div class="hero-jar">
+      <img src="{{ collections.featuredProducts[0].data.image }}" alt="{{ collections.featuredProducts[0].data.title }}" />
+    </div>
+  {% endif %}
+</section>
+
+<section class="story-section" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-content reveal">
+        <p class="section-label">The Origin</p>
+        <h2 class="section-title">Araku<br /><em>doesn't rush.</em></h2>
+        <div class="gold-rule"></div>
+        <div class="story-body">
+          <p>Deep in the Eastern Ghats, where the valleys stay cool and the air carries no exhaust, wildflowers bloom without instruction. No pesticides. No schedules. No interference.</p>
+          <p>The bees here have followed the same flowers for generations, producing honey that tastes like the forest it came from — complex, raw, and completely alive. The coffee grows in their shade, ripening slowly at altitude.</p>
+        </div>
+        <div class="story-stats">
+          <div class="stat-item">
+            <div class="stat-num">900m</div>
+            <div class="stat-label">Above sea level</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Wildflower sourced</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Pesticides used</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-quote-block reveal">
+        <p class="story-quote">"I went back to a valley I'd loved since childhood, and found honey and coffee that tasted like nowhere else. Because they come from nowhere else."</p>
+        <p class="story-signature">&mdash; Founder, Nilasaar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="purity-section" id="purity">
+  <div class="container">
+    <div class="purity-header reveal">
+      <p class="section-label">Purity Promise</p>
+      <h2 class="section-title">We don't ask you<br /><em>to trust us.</em></h2>
+      <div class="gold-rule"></div>
+      <p class="purity-quote">"We show you why you can."</p>
+    </div>
+    <div class="purity-pillars reveal">
+      <div class="purity-pillar">
+        <div class="pillar-icon">&#127807;</div>
+        <div class="pillar-title">No Sugar Syrup</div>
+        <div class="pillar-desc">Ever. What you get is exactly what nature made.</div>
+      </div>
+      <div class="purity-pillar">
+        <div class="pillar-icon">&#128300;</div>
+        <div class="pillar-title">Lab Tested</div>
+        <div class="pillar-desc">Independent verification, on request &mdash; not just a claim.</div>
+      </div>
+      <div class="purity-pillar">
+        <div class="pillar-icon">&#128029;</div>
+        <div class="pillar-title">Wildflower Sourced</div>
+        <div class="pillar-desc">From pesticide-free valleys, season after season.</div>
+      </div>
+      <div class="purity-pillar">
+        <div class="pillar-icon">&#10052;&#65039;</div>
+        <div class="pillar-title">Cold Processed</div>
+        <div class="pillar-desc">Nature's work, preserved as is.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="catalog catalog-dark" id="honey">
+  <div class="container">
+    <p class="section-label">The Product</p>
+    <h2 class="section-title">The <em>Honey</em></h2>
+    <div class="gold-rule"></div>
+    {% if collections.honeyProducts.length %}
+      <div class="product-grid">
+        {% for product in collections.honeyProducts %}
+          {% include "product-card.njk" %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="catalog-empty">New jars are on their way &mdash; check back soon.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="catalog catalog-light" id="coffee">
+  <div class="container">
+    <p class="section-label">The Product</p>
+    <h2 class="section-title">The <em>Coffee</em></h2>
+    <div class="gold-rule"></div>
+    {% if collections.coffeeProducts.length %}
+      <div class="product-grid">
+        {% for product in collections.coffeeProducts %}
+          {% include "product-card.njk" %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="catalog-empty">Our first batch is roasting &mdash; coffee arrives here soon.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="gift-section">
+  <div class="container">
+    <div class="gift-inner reveal">
+      <p class="section-label">For Someone Special</p>
+      <h2 class="section-title">Give something<br /><em>that has a story.</em></h2>
+      <div class="gold-rule"></div>
+      <p class="gift-body">Most gifts are forgotten by next week. Nilasaar stays &mdash; in the kitchen, in the morning cup, in the quiet satisfaction of giving something genuinely good.</p>
+      <div class="gift-tags">
+        <span class="gift-tag">For wellness journeys</span>
+        <span class="gift-tag">For someone who has everything</span>
+        <span class="gift-tag">For anyone who deserves the real thing</span>
+      </div>
+      <a href="#honey" class="btn-gold">Order as a Gift</a>
+    </div>
+  </div>
+</section>
